@@ -18,3 +18,10 @@ spring:
             - Path=/users/**
           filters:
             - RewritePath=/users(?<segment>/?.*), $\{segment}
+
+        - id: PROFILE-SERVICE
+          uri: lb://PROFILE-SERVICE
+          predicates:
+            - Path=/profiles/**
+          filters:
+            - RewritePath=/profiles(?<segment>/?.*), $\{segment}
