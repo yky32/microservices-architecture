@@ -5,7 +5,8 @@
 * User-Service
 * Service
 
+# Command
+* mvn clean package dockerfile:push 
+
 # K8S's naming of services
-`
-podname-{replica-index}.{service}.default.svc.cluster.local
-`
+`podname-{replica-index}.{service}.default.svc.cluster.local`
