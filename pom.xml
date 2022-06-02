@@ -14,6 +14,7 @@
     <modules>
         <module>user-service</module>
         <module>profile-service</module>
+        <module>service-registry</module>
     </modules>
 
     <groupId>com.quinsic</groupId>
