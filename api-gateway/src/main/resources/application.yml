@@ -15,9 +15,9 @@ spring:
         - id: USER-SERVICE
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/users/**
+            - Path=/api/users/**
           filters:
-            - RewritePath=/users(?<segment>/?.*), $\{segment}
+            - RewritePath=/api/users(?<segment>/?.*), $\{segment}
 
         - id: PROFILE-SERVICE
           uri: lb://PROFILE-SERVICE
