@@ -13,6 +13,7 @@
 
     <modules>
         <module>user-service</module>
+        <module>profile-service</module>
     </modules>
 
     <groupId>com.quinsic</groupId>
@@ -44,6 +45,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
