@@ -4,6 +4,8 @@ server:
 spring:
     application:
         name: USER-SERVICE
+    zipkin:
+        base-url: http://127.0.0.1:9411/
     datasource:
         url: jdbc:postgresql://yky32.asuscomm.com:5435/tgt-user
         username: postgres

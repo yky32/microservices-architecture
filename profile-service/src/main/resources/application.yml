@@ -4,6 +4,8 @@ server:
 spring:
     application:
         name: PROFILE-SERVICE
+    zipkin:
+        base-url: http://127.0.0.1:9411/
     datasource:
         url: jdbc:postgresql://yky32.asuscomm.com:5435/tgt-profile
         username: postgres
@@ -15,12 +17,12 @@ spring:
         hibernate:
             ddl-auto: update
 
-eureka:
-    instance:
-        preferIpAddress: true
-        hostname: eureka-0
-    client:
-        registerWithEureka: true
-        fetchRegistry: true
-        serviceUrl:
-            defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+#eureka:
+#    instance:
+#        preferIpAddress: true
+#        hostname: eureka-0
+#    client:
+#        registerWithEureka: true
+#        fetchRegistry: true
+#        serviceUrl:
+#            defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
