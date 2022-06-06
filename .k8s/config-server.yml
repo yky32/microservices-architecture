@@ -5,7 +5,7 @@ metadata:
   labels:
     app: cloud-config-server-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: cloud-config-server-app
