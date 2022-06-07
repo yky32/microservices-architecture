@@ -14,6 +14,6 @@ public class UsersEndpoint {
     @GetMapping("/{id}")
     public String getUser(@PathVariable("id") Long id) {
         log.info("getUser {}", id);
-        return "this is from users.";
+        return "this is from users... hahahhah" ;
     }
 }

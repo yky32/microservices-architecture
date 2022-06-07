@@ -80,6 +80,9 @@ jobs:
       - name: Save DigitalOcean kubeconfig
         run: doctl kubernetes cluster kubeconfig save "$K8S_CLUSTER_ID"
 
+      - name: Test echo k8s pwd
+        run: ls -ltr
+
       - name: Kubernetes rollout the latest image
         run: kubectl rollout restart deploy
 
