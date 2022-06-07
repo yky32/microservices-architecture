@@ -60,4 +60,7 @@ jobs:
         url: 'https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7'
         method: 'POST'
         customHeaders: '{"Content-Type": "application/json"}'
-        data: '{"username": "tgt-build-bot", "content": "OK!"}'
+        data: '{
+        "username": "tgt-build-bot", 
+        "content": ${{ steps.date.outputs.date }}
+        }'
