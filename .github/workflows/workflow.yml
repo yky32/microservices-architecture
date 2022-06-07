@@ -53,3 +53,11 @@ jobs:
       env:
           MAVEN_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: HTTP Request Action - End
+      uses: fjogeleit/http-request-action@v1.9.2
+      with:
+        url: 'https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7'
+        method: 'POST'
+        customHeaders: '{"Content-Type": "application/json"}'
+        data: '{"username": "tgt-build-bot", "content": "OK!"}'
