@@ -62,5 +62,5 @@ jobs:
         customHeaders: '{"Content-Type": "application/json"}'
         data: '{
         "username": "tgt-build-bot", 
-        "content": ${{ steps.date.outputs.date }}
+        "content":  "`${{ steps.date.outputs.date }}`"
         }'
