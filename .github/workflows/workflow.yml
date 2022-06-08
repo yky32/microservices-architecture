@@ -11,6 +11,7 @@ on:
 env:
   K8S_CLUSTER_ID: ${{ secrets.DIGITALOCEAN_K8S_CLUSTER_ID }}
   K8S_YAML_PATH: ./.k8s
+  PROJECT_NAME: tgt
 
 jobs:
   test:
@@ -80,7 +81,7 @@ jobs:
           --header 'content-type: application/json' \
           --url https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7 \
           --data '{
-            "username": "tgt-build-bot", 
+            "username": "$PROJECT_NAME-build-bot", 
             "content":  "${{github.event.repository.pushed_at}}"
           }'
 
@@ -110,6 +111,6 @@ jobs:
           --header 'content-type: application/json' \
           --url https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7 \
           --data '{
-            "username": "tgt-deploy-bot", 
+            "username": "$PROJECT_NAME-deploy-bot", 
             "content":  "${{github.event.repository.pushed_at}}"
           }'

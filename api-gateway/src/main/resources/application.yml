@@ -15,11 +15,11 @@ spring:
             - RewritePath=/api/users(?<segment>/?.*), $\{segment}
 
         - id: USER-SERVICE-EMMA
-            uri: lb://USER-SERVICE
-            predicates:
-              - Path=/emma/**
-            filters:
-              - RewritePath=/emma(?<segment>/?.*), $\{segment}
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/emma/**
+          filters:
+            - RewritePath=/emma(?<segment>/?.*), $\{segment}
 
         - id: PROFILE-SERVICE
           uri: lb://PROFILE-SERVICE
