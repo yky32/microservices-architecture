@@ -6,16 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/callback")
 @Slf4j
-public class Test {
+public class EmmaEndpoint {
 
     @GetMapping()
     public String test() {
-        return "this is from UserServiceApplication";
+        return "this is from EmmaEndpoint";
     }
-
-
-
 
 }
