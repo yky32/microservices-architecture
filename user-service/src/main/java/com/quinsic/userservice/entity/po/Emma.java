@@ -1,0 +1,30 @@
+package com.quinsic.userservice.entity.po;
+
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@Builder
+public class Emma {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb") // or, json
+    private Object callbackContext;
+}
