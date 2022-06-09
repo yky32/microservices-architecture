@@ -22,12 +22,11 @@ public class EmmaEndpoint {
     }
 
     @PostMapping()
-    public String callback(@RequestBody Object context) {
+    public Emma callback(@RequestBody Object context) {
         Emma emma = Emma.builder()
                 .callbackContext(context)
                 .callbackDatetime(Instant.now())
                 .build();
-        emma = emmaRepository.save(emma);
-        return emma.toString();
+        return emmaRepository.save(emma);
     }
 }

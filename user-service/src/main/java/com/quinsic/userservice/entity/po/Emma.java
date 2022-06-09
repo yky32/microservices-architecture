@@ -22,7 +22,7 @@ import java.time.Instant;
 @Table
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Builder
-public class Emma {
+public class Emma extends AuditEntity{
 
     @Id
     @Column(name = "id")
