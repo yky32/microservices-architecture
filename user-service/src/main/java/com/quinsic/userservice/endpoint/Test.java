@@ -12,7 +12,7 @@ public class Test {
 
     @GetMapping()
     public String test() {
-        return "this is from UserServiceApplication";
+        return "this is from 1- UserServiceApplication";
     }
 
 
