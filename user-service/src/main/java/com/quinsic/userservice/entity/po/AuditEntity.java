@@ -1,5 +1,9 @@
 package com.quinsic.userservice.entity.po;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,6 +15,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 
@@ -25,9 +30,13 @@ public class AuditEntity implements Serializable {
 
     @Column(name = "create_dt")
     @CreatedDate
-    protected Date createDt;
+    @JsonDeserialize(using = InstantDeserializer.class)
+    @JsonSerialize(using = InstantSerializer.class)
+    protected Instant createDt;
 
     @Column(name = "update_dt")
     @LastModifiedDate
-    protected Date updateDt;
+    @JsonDeserialize(using = InstantDeserializer.class)
+    @JsonSerialize(using = InstantSerializer.class)
+    protected Instant updateDt;
 }
