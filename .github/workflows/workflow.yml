@@ -13,23 +13,6 @@ env:
   K8S_YAML_PATH: ./.k8s
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          server-id: docker.io
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-
-      - name: Build with Maven
-        run: mvn package
-
   build:
     runs-on: ubuntu-latest
     steps:
