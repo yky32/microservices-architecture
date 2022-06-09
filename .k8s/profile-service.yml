@@ -5,14 +5,14 @@ metadata:
   labels:
     app: profile-service-app
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: profile-service-app
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 0
       maxUnavailable: 1
   template:
     metadata:
