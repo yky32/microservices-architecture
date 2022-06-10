@@ -12,12 +12,11 @@
     </parent>
 
     <modules>
-        <module>app-core</module>
-        <module>cloud-config-server</module>
-        <module>service-registry</module>
         <module>api-gateway</module>
+        <module>service-registry</module>
         <module>user-service</module>
         <module>profile-service</module>
+        <module>cloud-config-server</module>
     </modules>
 
     <groupId>com.quinsic</groupId>
