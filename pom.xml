@@ -12,12 +12,12 @@
     </parent>
 
     <modules>
+        <module>app-core</module>
         <module>api-gateway</module>
         <module>service-registry</module>
         <module>user-service</module>
         <module>profile-service</module>
         <module>cloud-config-server</module>
-        <module>app-core</module>
     </modules>
 
     <groupId>com.quinsic</groupId>
@@ -54,11 +54,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.quinsic</groupId>
-            <artifactId>app-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
