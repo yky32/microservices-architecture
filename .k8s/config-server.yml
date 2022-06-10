@@ -6,6 +6,7 @@ metadata:
     app: cloud-config-server-app
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: cloud-config-server-app
