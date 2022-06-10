@@ -5,15 +5,15 @@ metadata:
   labels:
     app: user-service-app
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: user-service-app
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 50%
-      maxUnavailable: 50%
+      maxSurge:  0
+      maxUnavailable: 1
   template:
     metadata:
       labels:
