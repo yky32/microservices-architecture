@@ -1,6 +1,5 @@
 package com.quinsic.profileservice.entity.po;
 
-import com.quinsic.appcore.AuditEntity;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +16,7 @@ import javax.persistence.*;
 @Table
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Builder
-public class Profile extends AuditEntity {
+public class Profile {
 
     @Id
     @Column(name = "id")
