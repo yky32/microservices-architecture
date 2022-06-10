@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
+import com.quinsic.appcore.AuditEntity;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +23,7 @@ import java.time.Instant;
 @Table
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Builder
-public class Emma extends AuditEntity{
+public class Emma extends AuditEntity {
 
     @Id
     @Column(name = "id")

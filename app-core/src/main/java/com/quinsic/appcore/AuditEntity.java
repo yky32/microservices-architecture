@@ -1,4 +1,4 @@
-package com.quinsic.userservice.entity.po;
+package com.quinsic.appcore;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -16,7 +16,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Date;
 
 
 @MappedSuperclass
