@@ -87,8 +87,8 @@ jobs:
       - name: Kubernetes apply -f ./.k8s
         run: kubectl apply -f "$K8S_YAML_PATH"
 
-     #- name: Kubernetes rollout the latest image
-     #  run: kubectl rollout restart deploy
+      - name: Kubernetes rollout the latest image
+        run: kubectl rollout restart deploy
 
       - name: Curl for Finish Deploy
         run: |
