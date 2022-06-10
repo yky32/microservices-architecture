@@ -48,12 +48,6 @@
             <version>2.14.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.quinsic</groupId>
-            <artifactId>app-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
         <!--        <dependency>-->
 <!--            <groupId>org.springframework.cloud</groupId>-->
 <!--            <artifactId>spring-cloud-starter-sleuth</artifactId>-->

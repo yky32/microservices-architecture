@@ -1,4 +1,4 @@
-package com.quinsic.appcore;
+package com.quinsic.userservice.entity.po;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
