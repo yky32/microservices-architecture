@@ -6,7 +6,7 @@ metadata:
     app: api-gateway-app
 spec:
   replicas: 1
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: api-gateway-app
