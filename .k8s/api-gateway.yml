@@ -36,8 +36,9 @@ metadata:
   name: api-gateway-svc
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
+    service.beta.kubernetes.io/do-loadbalancer-algorithm: "round_robin"
     service.beta.kubernetes.io/do-loadbalancer-tls-ports: "443"
-    service.beta.kubernetes.io/do-loadbalancer-tls-passthrough: "true"
+    service.beta.kubernetes.io/do-loadbalancer-certificate-id: "qs-co"
     #https://github.com/digitalocean/digitalocean-cloud-controller-manager/blob/master/docs/controllers/services/examples/https-with-cert-nginx-minimal.yml
 spec:
   type: LoadBalancer
