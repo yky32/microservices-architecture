@@ -31,7 +31,7 @@ jobs:
       - name: Publish to GitHub Packages Apache Maven
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml --file app-core/pom.xml
         env:
-          GITHUB_TOKEN: ${{ secrets.token }}
+          GITHUB_TOKEN: ${{ secrets.MAVEN_GITHUB_TOKEN }}
 
   build:
     needs: publish-pkg
