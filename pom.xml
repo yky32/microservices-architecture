@@ -17,7 +17,6 @@
         <module>user-service</module>
         <module>profile-service</module>
         <module>cloud-config-server</module>
-        <module>app-core</module>
     </modules>
 
     <groupId>com.quinsic</groupId>
