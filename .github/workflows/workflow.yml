@@ -13,7 +13,28 @@ env:
   K8S_YAML_PATH: ./.k8s
 
 jobs:
+  publish-pkg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11 for Shared Runner
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+          settings-path: ${{ github.workspace }} # location for the settings.xml file
+
+      - name: Build with Maven
+        run: mvn package --file app-core/pom.xml
+
+      - name: Publish to GitHub Packages Apache Maven
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
   build:
+    needs: publish-pkg
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,9 +47,12 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-          server-id: docker.io
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
+
+      - name: Building and Deploy [app-core] pkg
+        run: mvn deploy -f app-core/pom.xml
+        env:
+          MAVEN_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Building and Pushing [user-service]
         run: mvn package dockerfile:push --file user-service/pom.xml
@@ -70,32 +94,32 @@ jobs:
             "content":  "${{ github.event.repository.pushed_at }}"
           }'
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Save DigitalOcean kubeconfig
-        run: doctl kubernetes cluster kubeconfig save "$K8S_CLUSTER_ID"
-
-      - name: Kubernetes apply -f ./.k8s
-        run: kubectl apply -f "$K8S_YAML_PATH"
-
-      - name: Kubernetes rollout the latest image
-        run: kubectl rollout restart deploy
-
-      - name: Curl for Finish Deploy
-        run: |
-          curl --request POST \
-          --header 'content-type: application/json' \
-          --url https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7 \
-          --data '{
-            "username": "${{ github.repository }}-deploy-bot", 
-            "content":  "${{ github.event.repository.pushed_at }}"
-          }'
+#  deploy:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@master
+#
+#      - name: Install doctl
+#        uses: digitalocean/action-doctl@v2
+#        with:
+#          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+#
+#      - name: Save DigitalOcean kubeconfig
+#        run: doctl kubernetes cluster kubeconfig save "$K8S_CLUSTER_ID"
+#
+#      - name: Kubernetes apply -f ./.k8s
+#        run: kubectl apply -f "$K8S_YAML_PATH"
+#
+#      - name: Kubernetes rollout the latest image
+#        run: kubectl rollout restart deploy
+#
+#      - name: Curl for Finish Deploy
+#        run: |
+#          curl --request POST \
+#          --header 'content-type: application/json' \
+#          --url https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7 \
+#          --data '{
+#            "username": "${{ github.repository }}-deploy-bot",
+#            "content":  "${{ github.event.repository.pushed_at }}"
+#          }'
