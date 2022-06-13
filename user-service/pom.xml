@@ -55,6 +55,11 @@
             <artifactId>hibernate-types-52</artifactId>
             <version>2.9.7</version>
         </dependency>
+        <dependency>
+            <groupId>com.quinsic</groupId>
+            <artifactId>app-core</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
