@@ -56,7 +56,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.MAVEN_GITHUB_TOKEN }}
 
       - name: Call another yml
-        id: local-action
         uses: ./.github/workflows/test/test.yml
 
   build-user-service:
