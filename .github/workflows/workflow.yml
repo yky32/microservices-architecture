@@ -60,10 +60,7 @@ jobs:
             [
               {
                 "id": "central",
-                "url": "https://maven.pkg.github.com/yky32/together-parent",
-                "snapshots": {
-                  "enabled": "true"
-                }
+                "url": "https://repo1.maven.org/maven2"
               },
               {
                 "id": "github",
