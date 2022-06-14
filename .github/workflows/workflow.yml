@@ -55,9 +55,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.MAVEN_GITHUB_TOKEN }}
 
-      - name: Call another yml
-        uses: ./.github/workflows/test/test.yml
-
   build-user-service:
     needs: publish-pkg
     runs-on: ubuntu-latest
