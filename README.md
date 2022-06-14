@@ -1,4 +1,4 @@
-[![SpringBoot CI/CD Pipeline](https://github.com/yky32/together-parent/actions/workflows/workflow.yml/badge.svg?branch=main)](https://github.com/yky32/together-parent/actions/workflows/workflow.yml)
+[![Main build](https://github.com/yky32/together-parent/actions/workflows/main.yml/badge.svg)](https://github.com/yky32/together-parent/actions/workflows/main.yml)
 
 # Together Microservices
 
