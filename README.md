@@ -1,6 +1,6 @@
 [![SpringBoot CI/CD Pipeline](https://github.com/yky32/together-parent/actions/workflows/workflow.yml/badge.svg?branch=main)](https://github.com/yky32/together-parent/actions/workflows/workflow.yml)
 
-# together-parent
+# Together-Parent
 
 * Api-Gateway
 * Profile-Service
