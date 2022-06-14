@@ -5,7 +5,7 @@
 * Api-Gateway
 * Profile-Service
 * User-Service
-* Service
+* Service-Registry
 
 # Command
 * mvn clean package dockerfile:push 
