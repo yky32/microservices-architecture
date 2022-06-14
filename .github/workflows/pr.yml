@@ -19,7 +19,12 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-        
+
+    - name: List of the github context environment variables
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: echo "$GITHUB_CONTEXT"
+
     - name: Curl for Finish PR Test
       run: |
         curl --request POST \
