@@ -47,12 +47,39 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-          server-id: docker.io
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
+#          server-id: docker.io
+#          server-username: MAVEN_USERNAME
+#          server-password: MAVEN_PASSWORD
+
+      - name: maven-settings-xml-action
+        uses: whelk-io/maven-settings-xml-action@v20
+        with:
+          active_profiles: >
+            ["github"]
+          repositories: >
+            [
+              {
+                "id": "central",
+                "url": "https://maven.pkg.github.com/yky32/together-parent",
+                "snapshots": {
+                  "enabled": "true"
+                }
+              },
+              {
+                "id": "github",
+                "url": "https://maven.pkg.github.com/yky32/together-parent",
+                "snapshots": {
+                  "enabled": "true"
+                }
+              }
+            ]
+          servers: '[
+            { "id": "github", "username": "yky32", "password": "${{ secrets.MAVEN_GITHUB_TOKEN }}" },
+            { "id": "docker.io", "username": "${{ secrets.DOCKER_USERNAME }}", "password": "${{ secrets.DOCKER_PASSWORD }}" }
+          ]'
 
       - name: Building and Pushing [user-service]
-        run: mvn package dockerfile:push --file user-service/pom.xml --settings .github/workflows/settings.xml
+        run: mvn package dockerfile:push --file user-service/pom.xml
         env:
           MAVEN_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
