@@ -33,7 +33,49 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.MAVEN_GITHUB_TOKEN }}
 
-  build:
+  build-user-service:
+    needs: publish-pkg
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: List of the GitHub Actions environment variables on ubuntu-latest
+        run: env
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Set up ~.m2/settings.xml
+        uses: whelk-io/maven-settings-xml-action@v20
+        with:
+          active_profiles: >
+            ["github"]
+          repositories: >
+            [
+              {
+                "id": "central",
+                "url": "https://repo1.maven.org/maven2"
+              },
+              {
+                "id": "github",
+                "url": "https://maven.pkg.github.com/yky32/together-parent",
+                "snapshots": {
+                  "enabled": "true"
+                }
+              }
+            ]
+          servers: '[
+              { "id": "github", "username": "yky32", "password": "${{ secrets.MAVEN_GITHUB_TOKEN }}" },
+              { "id": "docker.io", "username": "${{ secrets.DOCKER_USERNAME }}", "password": "${{ secrets.DOCKER_PASSWORD }}" }
+            ]'
+
+      - name: Building and Pushing [user-service]
+        run: mvn package dockerfile:push --file user-service/pom.xml
+
+  build-others:
     needs: publish-pkg
     runs-on: ubuntu-latest
     steps:
@@ -71,9 +113,6 @@ jobs:
             { "id": "github", "username": "yky32", "password": "${{ secrets.MAVEN_GITHUB_TOKEN }}" },
             { "id": "docker.io", "username": "${{ secrets.DOCKER_USERNAME }}", "password": "${{ secrets.DOCKER_PASSWORD }}" }
           ]'
-
-      - name: Building and Pushing [user-service]
-        run: mvn package dockerfile:push --file user-service/pom.xml
 
       - name: Building and Pushing [profile-service]
         run: mvn package dockerfile:push --file profile-service/pom.xml
