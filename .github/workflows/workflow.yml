@@ -25,10 +25,11 @@ env:
         }
       }
     ]
-  M2_SETTINGS_XML_SERVER: '[
-    { "id": "github", "username": "yky32", "password": "${{ secrets.MAVEN_GITHUB_TOKEN }}" },
-    { "id": "docker.io", "username": "${{ secrets.DOCKER_USERNAME }}", "password": "${{ secrets.DOCKER_PASSWORD }}" } 
-  ]'
+  M2_SETTINGS_XML_SERVER: >
+    [
+      { "id": "github", "username": "yky32", "password": "${{ secrets.MAVEN_GITHUB_TOKEN }}" },
+      { "id": "docker.io", "username": "${{ secrets.DOCKER_USERNAME }}", "password": "${{ secrets.DOCKER_PASSWORD }}" } 
+    ]
 
 jobs:
   publish-pkg:
@@ -124,10 +125,7 @@ jobs:
                 }
               }
             ]
-          servers: '[
-              { "id": "github", "username": "yky32", "password": "${{ secrets.MAVEN_GITHUB_TOKEN }}" },
-              { "id": "docker.io", "username": "${{ secrets.DOCKER_USERNAME }}", "password": "${{ secrets.DOCKER_PASSWORD }}" }
-            ]'
+          servers: ${{ env.M2_SETTINGS_XML_SERVER }}
 
       - name: Building and Pushing [profile-service]
         run: mvn package dockerfile:push --file profile-service/pom.xml
@@ -166,10 +164,7 @@ jobs:
                 }
               }
             ]
-          servers: '[
-              { "id": "github", "username": "yky32", "password": "${{ secrets.MAVEN_GITHUB_TOKEN }}" },
-              { "id": "docker.io", "username": "${{ secrets.DOCKER_USERNAME }}", "password": "${{ secrets.DOCKER_PASSWORD }}" }
-            ]'
+          servers: ${{ env.M2_SETTINGS_XML_SERVER }}
 
       - name: Building and Pushing [service-registry]
         run: mvn package dockerfile:push --file service-registry/pom.xml
@@ -208,10 +203,7 @@ jobs:
                 }
               }
             ]
-          servers: '[
-              { "id": "github", "username": "yky32", "password": "${{ secrets.MAVEN_GITHUB_TOKEN }}" },
-              { "id": "docker.io", "username": "${{ secrets.DOCKER_USERNAME }}", "password": "${{ secrets.DOCKER_PASSWORD }}" }
-            ]'
+          servers: ${{ env.M2_SETTINGS_XML_SERVER }}
 
       - name: Building and Pushing [api-gateway]
         run: mvn package dockerfile:push --file api-gateway/pom.xml
@@ -250,10 +242,7 @@ jobs:
                 }
               }
             ]
-          servers: '[
-              { "id": "github", "username": "yky32", "password": "${{ secrets.MAVEN_GITHUB_TOKEN }}" },
-              { "id": "docker.io", "username": "${{ secrets.DOCKER_USERNAME }}", "password": "${{ secrets.DOCKER_PASSWORD }}" }
-            ]'
+          servers: ${{ env.M2_SETTINGS_XML_SERVER }}
 
       - name: Building and Pushing [cloud-config-server]
         run: mvn package dockerfile:push --file cloud-config-server/pom.xml
