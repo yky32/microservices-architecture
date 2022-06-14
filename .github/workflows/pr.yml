@@ -9,9 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test_pull_request:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -21,5 +20,12 @@ jobs:
         distribution: 'temurin'
         cache: maven
         
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Curl for Finish PR Test
+      run: |
+        curl --request POST \
+        --header 'content-type: application/json' \
+        --url https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7 \
+        --data '{
+          "username": "${{ github.ref_name }}-test-bot", 
+          "content":  "${{ github.run_number }}"
+          }'
