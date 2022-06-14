@@ -31,6 +31,6 @@ jobs:
         --header 'content-type: application/json' \
         --url https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7 \
         --data '{
-          "username": "${{ github.ref_name }}-test-bot", 
-          "content":  "${{ github.run_number }}"
+          "username": "${{ github.head_ref }}-test-bot", 
+          "content":  "${{ github.event.sender.login }} - ${{ github.run_number }} - ${{ github.event.repository.pushed_at }}"
           }'
