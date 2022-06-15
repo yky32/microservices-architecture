@@ -234,7 +234,7 @@ jobs:
             "content":  "${{ github.event.sender.login }} - ${{ github.run_number }} - ${{ github.event.head_commit.timestamp }}"
           }'
 
-      - if: ${{ failure() || contains(join(needs.*.result, ','), 'failure') }}
+      - if: ${{ failure() && !contains(join(needs.*.result, ','), 'success') }}
         name: Curl for Fail Build Alert
         run: |
           curl --request POST \
