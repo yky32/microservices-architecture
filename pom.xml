@@ -17,6 +17,7 @@
         <module>user-service</module>
         <module>profile-service</module>
         <module>cloud-config-server</module>
+        <module>booking-service</module>
     </modules>
 
     <groupId>com.quinsic</groupId>
@@ -53,6 +54,11 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vladmihalcea</groupId>
+            <artifactId>hibernate-types-52</artifactId>
+            <version>2.16.2</version>
         </dependency>
     </dependencies>
 </project>
