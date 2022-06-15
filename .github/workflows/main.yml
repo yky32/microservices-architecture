@@ -224,7 +224,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Curl for Finish Build
-        if: ${{ containsAll(join(needs.*.result, ','), 'success') }}
+        if: ${{ success() && containsAll(join(needs.*.result, ','), 'success') }}
         run: |
           curl --request POST \
           --header 'content-type: application/json' \
@@ -234,7 +234,7 @@ jobs:
             "content":  "${{ github.event.sender.login }} - ${{ github.run_number }} - ${{ github.event.head_commit.timestamp }}"
           }'
 
-      - if: ${{ contains(join(needs.*.result, ','), 'failure') }}
+      - if: ${{ failure() || contains(join(needs.*.result, ','), 'failure') }}
         name: Curl for Fail Build Alert
         run: |
           curl --request POST \
