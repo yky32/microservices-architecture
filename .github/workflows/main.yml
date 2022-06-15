@@ -205,7 +205,7 @@ jobs:
         with:
           active_profiles: ${{ env.M2_SETTINGS_XML_ACTIVE_PROFILES }}
           repositories: ${{ env.M2_SETTINGS_XML_REPOSITORIES }}
-          servers: ${{ env.M2_SETTINGS_XML_REPOSITORIES }}
+          servers: ${{ env.M2_SETTINGS_XML_SERVER }}
 
       - name: Building and Pushing [cloud-config-server]
         run: mvn package dockerfile:push --file cloud-config-server/pom.xml
