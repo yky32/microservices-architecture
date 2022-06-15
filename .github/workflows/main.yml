@@ -110,6 +110,31 @@ jobs:
       - name: Building and Pushing [profile-service]
         run: mvn package dockerfile:push --file profile-service/pom.xml
 
+  build-booking-service:
+    needs: publish-pkg
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: List of the GitHub Actions environment variables on ubuntu-latest
+        run: env
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+      - name: Set up ~.m2/settings.xml
+        uses: whelk-io/maven-settings-xml-action@v20
+        with:
+          active_profiles: ${{ env.M2_SETTINGS_XML_ACTIVE_PROFILES }}
+          repositories: ${{ env.M2_SETTINGS_XML_REPOSITORIES }}
+          servers: ${{ env.M2_SETTINGS_XML_SERVER }}
+
+      - name: Building and Pushing [booking-service]
+        run: mvn package dockerfile:push --file booking-service/pom.xml
+
   build-service-registry:
     needs: publish-pkg
     runs-on: ubuntu-latest
@@ -191,6 +216,7 @@ jobs:
       build-api-gateway,
       build-cloud-config-server,
       build-profile-service,
+      build-booking-service,
       build-user-service
     ]
     runs-on: ubuntu-latest
@@ -202,7 +228,7 @@ jobs:
           --header 'content-type: application/json' \
           --url https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7 \
           --data '{
-            "username": "${{ github.event.repository.name }}-build-bot", 
+            "username": "OK-${{ github.event.repository.name }}-build-bot", 
             "content":  "${{ github.event.sender.login }} - ${{ github.run_number }} - ${{ github.event.head_commit.timestamp }}"
           }'
 
