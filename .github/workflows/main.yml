@@ -211,6 +211,7 @@ jobs:
         run: mvn package dockerfile:push --file cloud-config-server/pom.xml
 
   build-finish:
+    if: ${{ always() }}
     needs: [
       build-service-registry,
       build-api-gateway,
@@ -219,11 +220,11 @@ jobs:
       build-booking-service,
       build-user-service
     ]
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Curl for Finish Build
+        if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
         run: |
           curl --request POST \
           --header 'content-type: application/json' \
