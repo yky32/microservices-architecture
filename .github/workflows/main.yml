@@ -205,7 +205,7 @@ jobs:
         with:
           active_profiles: ${{ env.M2_SETTINGS_XML_ACTIVE_PROFILES }}
           repositories: ${{ env.M2_SETTINGS_XML_REPOSITORIES }}
-          servers: ${{ env.M2_SETTINGS_XML_SERVER }}
+          servers: ${{ env.M2_SETTINGS_XML_REPOSITORIES }}
 
       - name: Building and Pushing [cloud-config-server]
         run: mvn package dockerfile:push --file cloud-config-server/pom.xml
@@ -229,6 +229,20 @@ jobs:
           --url https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7 \
           --data '{
             "username": "OK-${{ github.event.repository.name }}-build-bot", 
+            "content":  "${{ github.event.sender.login }} - ${{ github.run_number }} - ${{ github.event.head_commit.timestamp }}"
+          }'
+
+  fail-alert:
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl for Fail Build Alert
+        run: |
+          curl --request POST \
+          --header 'content-type: application/json' \
+          --url https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7 \
+          --data '{
+            "username": "Fail-${{ github.event.repository.name }}-build-bot", 
             "content":  "${{ github.event.sender.login }} - ${{ github.run_number }} - ${{ github.event.head_commit.timestamp }}"
           }'
 
