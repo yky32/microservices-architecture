@@ -13,3 +13,6 @@
 
 # K8S's naming of services
 `podname-{replica-index}.{service}.default.svc.cluster.local`
+
+# OpenAPI - Swagger 
+https://springdoc.org/
