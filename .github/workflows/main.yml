@@ -224,7 +224,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Curl for Finish Build
-        if: ${{ success() && contains(join(needs.*.result, ','), 'success') }}
+        if: ${{ success() && !contains(join(needs.*.result, ','), 'failure') }}
         run: |
           curl --request POST \
           --header 'content-type: application/json' \
