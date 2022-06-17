@@ -79,7 +79,7 @@ jobs:
       - name: Set up ~.m2/settings.xml
         uses: whelk-io/maven-settings-xml-action@v20
         with:
-          active_profiles:  ${{ env.M2_SETTINGS_XML_ACTIVE_PROFILES }}
+          active_profiles: ${{ env.M2_SETTINGS_XML_ACTIVE_PROFILES }}
           repositories: ${{ env.M2_SETTINGS_XML_REPOSITORIES }}
           servers: ${{ env.M2_SETTINGS_XML_SERVER }}
 
@@ -260,13 +260,41 @@ jobs:
       - name: Save DigitalOcean kubeconfig
         run: doctl kubernetes cluster kubeconfig save "$K8S_CLUSTER_ID"
 
-#      - name: Kubernetes apply -f ./.k8s
-#        run: kubectl apply -f "$K8S_YAML_PATH"
-#
-#      - name: Kubernetes rollout the latest image
-#        run: kubectl rollout restart deploy
+      - name: Kubernetes apply -f ./.k8s
+        run: kubectl apply -f "$K8S_YAML_PATH"
+
+      - name: Kubernetes rollout the latest image
+        run: kubectl rollout restart deploy
 
       - name: Curl for Finish Deploy
+        run: |
+          curl --request POST \
+          --header 'content-type: application/json' \
+          --url ${{ env.DISCORD_WEBHOOK }} \
+          --data '{
+            "username": "OK-${{ github.event.repository.name }}-deploy-bot", 
+            "content":  "${{ github.event.sender.login }} - ${{ github.run_number }} - ${{ github.event.head_commit.timestamp }}"
+          }'
+
+  deploy-finish:
+    if: ${{ always() }}
+    needs: [ deploy ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Curl for Finish Deploy
+        if: ${{ success() || !contains(join(needs.*.result, ','), 'failure') }}
+        run: |
+          curl --request POST \
+          --header 'content-type: application/json' \
+          --url ${{ env.DISCORD_WEBHOOK }} \
+          --data '{
+            "username": "OK-${{ github.event.repository.name }}-deploy-bot", 
+            "content":  "${{ github.event.sender.login }} - ${{ github.run_number }} - ${{ github.event.head_commit.timestamp }}"
+          }'
+
+      - if: ${{ failure() || !contains(join(needs.*.result, ','), 'success') }}
+        name: Curl for Fail Deploy Alert
         run: |
           curl --request POST \
           --header 'content-type: application/json' \
