@@ -13,7 +13,7 @@ env:
   K8S_YAML_PATH: ./.k8s
   JAVA_VERSION: '11'
   JAVA_DISTRIBUTION: 'temurin'
-  DISCORD_WEBHOOK: 'https://discord.com/api/webhooks/851179044178231336/X6hEMqgRwfKGhig8VRQe4soGoii_Tu2cjxTCm--kfPxt8svswCUPjwhIq4pVh_Y9Npy7'
+  DISCORD_WEBHOOK: ''
   M2_SETTINGS_XML_ACTIVE_PROFILES: '["github"]'
   M2_SETTINGS_XML_REPOSITORIES: >
     [
