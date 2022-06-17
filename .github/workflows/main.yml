@@ -247,7 +247,7 @@ jobs:
           }'
 
   deploy:
-    needs: build
+    needs: build-finish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
