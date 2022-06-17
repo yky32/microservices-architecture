@@ -25,8 +25,8 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-      #defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+      #defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
 
 
 # Actuator Basic Info
@@ -40,10 +40,8 @@ management:
     env:
       enabled: true
   health:
-    readinessstate:
-      enabled: true
-    livenessstate:
-      enabled: true
+    readinessstate.enabled: true
+    livenessstate.enabled: true
   endpoints:
     web:
       exposure:
@@ -56,6 +54,4 @@ management:
     health:
       probes.enabled: true
       show-details: always
-  security:
-    enabled: false
 # Actuator Basic Info
