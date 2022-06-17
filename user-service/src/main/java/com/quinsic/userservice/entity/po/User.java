@@ -20,7 +20,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table(name = "users")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Builder
 public class User extends AuditEntity {
@@ -32,5 +32,4 @@ public class User extends AuditEntity {
 
     @Column(name = "username")
     private String username;
-
 }

@@ -25,4 +25,35 @@ eureka:
         registerWithEureka: true
         fetchRegistry: true
         serviceUrl:
-            defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+            defaultZone: http://localhost:8761/eureka
+            #defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+
+
+# Actuator Basic Info
+info:
+    application:
+        name: ${spring.application.name}
+        version: '@project.version@'
+
+management:
+    info:
+        env:
+          enabled: true
+    health.livenessState.enabled: true
+    health.readinessState.enabled: true
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+    endpoint:
+        prometheus:
+            # Close the default prometheus endpoint and create your own
+            enabled: true
+        gateway:
+            enabled: true
+        health:
+            probes.enabled: true
+            show-details: always
+    security:
+        enabled: false
+# Actuator Basic Info
