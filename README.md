@@ -12,7 +12,8 @@
 * mvn clean package dockerfile:push 
 
 # K8S's naming of services
-`podname-{replica-index}.{service}.default.svc.cluster.local`
+`httpL://podname-{replica-index}.{service}.default.svc.cluster.local` <br>
+`http://eureka-0.eureka.default.svc.cluster.local:8761/eureka`
 
 # OpenAPI - Swagger 
 https://springdoc.org/

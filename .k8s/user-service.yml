@@ -26,6 +26,12 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 9002
+          env:
+            - name: EUREKA_CLIENT_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: eureka-cm
+                  key: eureka_client_url
             
 ---
 
